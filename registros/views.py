@@ -1,10 +1,10 @@
-import http
 from django.shortcuts import redirect, render
 from fornecedores.forms import FornecedorForm
 from pessoas.forms import PessoaForm
 from pessoas.forms import EnderecoForm
 from django.contrib import messages
 from django.contrib.messages import constants
+from pessoas.models import Pessoa
 
 # Create your views here
 def formulario_cadastro(request):
@@ -45,3 +45,11 @@ def formulario_cadastro(request):
             return redirect('/registros/')
         messages.add_message(request, constants.WARNING, 'Erro ao registrar os dados! Tente novamente.')
         return redirect('/registros/')
+
+
+def listar_cadastros(request):
+    cadastros = Pessoa.objects.all()
+    context = {
+        'cadastros': cadastros
+    }
+    return render(request, 'listar_cadastros.html', context=context)

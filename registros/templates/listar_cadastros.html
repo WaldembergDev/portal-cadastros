@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block title %}Listar Cadastros{% endblock %}
+{% block content %}
+    <div>
+        <h1>Lista de cadastros</h1>
+        {% for cadastro in cadastros %}
+            <p>{{cadastro}}</p>
+        {% endfor %}
+    </div>
+{% endblock %}
