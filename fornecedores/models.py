@@ -25,7 +25,7 @@ class Fornecedor(models.Model):
     cnae_principal = models.CharField(max_length=255)
     cnae_secundario = models.CharField(max_length=255)
     prestou_servicos_mei = models.BooleanField()
-    servicos_prestados = models.TextField()
+    servicos_prestados = models.TextField(null=True, blank=True)
     area_interesse = models.ManyToManyField(AreaInteresse)
     possui_disponibilidade_servicos_eventuais = models.BooleanField()
     possui_smartphone = models.BooleanField()

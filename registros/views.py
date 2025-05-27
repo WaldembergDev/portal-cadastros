@@ -3,6 +3,8 @@ from django.shortcuts import redirect, render
 from fornecedores.forms import FornecedorForm
 from pessoas.forms import PessoaForm
 from pessoas.forms import EnderecoForm
+from django.contrib import messages
+from django.contrib.messages import constants
 
 # Create your views here
 def formulario_cadastro(request):
@@ -39,4 +41,7 @@ def formulario_cadastro(request):
                 'endereco_form': endereco_form,
                 'fornecedor_form': fornecedor
             }
+            messages.add_message(request, constants.SUCCESS, 'Dados registrados com sucesso!')
+            return redirect('/registros/')
+        messages.add_message(request, constants.WARNING, 'Erro ao registrar os dados! Tente novamente.')
         return redirect('/registros/')
