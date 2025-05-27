@@ -9,6 +9,9 @@ class AreaInteresse(models.Model):
                           unique=True)
     nome = models.CharField(max_length=120, unique=True)
 
+    def __str__(self):
+        return self.nome
+
 # Create your models here.
 class Fornecedor(models.Model):
     id = models.UUIDField(primary_key=True,
@@ -19,7 +22,7 @@ class Fornecedor(models.Model):
     nome_empresarial = models.CharField(max_length=120)
     tempo_mei = models.DateField()
     possui_conta_pj = models.BooleanField() # vinculada ao mei
-    cnae_principal = models.CharField()
+    cnae_principal = models.CharField(max_length=255)
     cnae_secundario = models.CharField(max_length=255)
     prestou_servicos_mei = models.BooleanField()
     servicos_prestados = models.TextField()

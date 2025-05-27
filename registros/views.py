@@ -1,4 +1,5 @@
-from django.shortcuts import render
+import http
+from django.shortcuts import redirect, render
 from fornecedores.forms import FornecedorForm
 from pessoas.forms import PessoaForm
 from pessoas.forms import EnderecoForm
@@ -19,6 +20,8 @@ def formulario_cadastro(request):
         pessoa_form = PessoaForm(request.POST)
         endereco_form = EnderecoForm(request.POST)
         fornecedor_form = FornecedorForm(request.POST)
+        if not fornecedor_form.is_valid():
+            print("Erros FornecedorForm:", fornecedor_form.errors) # <--- ISSO VAI TE MOSTRAR O PROBLEMA
         if pessoa_form.is_valid() and endereco_form.is_valid() and fornecedor_form.is_valid():
             pessoa = pessoa_form.save()
             endereco = endereco_form.save(commit=False)
@@ -36,3 +39,4 @@ def formulario_cadastro(request):
                 'endereco_form': endereco_form,
                 'fornecedor_form': fornecedor
             }
+        return redirect('/registros/')
