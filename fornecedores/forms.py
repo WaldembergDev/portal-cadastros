@@ -8,8 +8,21 @@ class FornecedorForm(forms.ModelForm):
         exclude = ['pessoa']
         widgets = {
             'tempo_mei': forms.DateInput(attrs={'type': 'date', 'class': 'form-control'}),
-            # Adicione outros widgets aqui se precisar, por exemplo:
-            # 'data_outro_campo': forms.DateInput(attrs={'type': 'date', 'class': 'form-control'}),
+        }
+        labels = {
+            'cnpj': 'CNPJ',
+            'tempo_mei': 'Data de Cadastro do MEI',
+            'possui_conta_pj': 'Possui conta PJ',
+            'cnae_principal': 'CNAE Principal',
+            'cnae_secundario': 'CNAE Secundário',
+            'prestou_servicos_mei': 'Prestou serviços como MEI',
+            'servicos_prestados': 'Serviços Prestados',
+            'area_interesse': 'Área(s) de Interesse',
+            'possui_disponibilidade_servicos_eventuais': 'Possui disponibilidade para serviços eventuais ou sob demanda',
+            'atuou_em_laboratorio_analise_ambiental': 'Atuou em labotatório de análise ambiental',
+            'possui_cursos_area_ambiental': 'Possui cursos na área ambiental',
+            'cursos_realizados': 'Cursos realizados na área ambiental',
+            'observacoes': 'Observações - Neste campo coloque informações relevantes que o Grupo Quality precisa saber'
         }
     
     def __init__(self, *args, **kwargs):

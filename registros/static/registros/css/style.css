@@ -1,0 +1,13 @@
+/* Estilizando o helptext padrão do Django */
+.helptext {
+    font-size: 0.875em; /* Um pouco menor */
+    color: #6c757d;     /* Cor 'muted' do Bootstrap */
+    display: block;     /* Garante que ocupe a linha abaixo */
+    margin-top: 0.25rem;
+}
+
+/* Se o help_text estiver dentro de um label (raro com as_div, mais comum com widgets customizados) */
+label .helptext {
+    font-weight: normal;
+    display: block;
+}

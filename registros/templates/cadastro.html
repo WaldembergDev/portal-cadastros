@@ -1,14 +1,45 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block title %}Cadastro{% endblock %}
+{% block head %}
+    <link rel="stylesheet" href="{% static 'registros/css/style.css' %}">
+{% endblock %}
 {% block content %}
-    <div class="container">
-        <h1>Formulário de Cadastro</h1>
-    <form action="." method="POST">
-        {% csrf_token %}
-        {{ pessoa_form }}
-        {{ endereco_form }}
-        {{ fornecedor_form }}
-        <input type="submit" value="Cadastrar">
-    </form>
+    <div class="container mt-5">
+    <div class="card shadow">
+        <div class="card-header bg-primary text-white">
+            <h2 class="mb-0">Formulário de Cadastro</h2>
+        </div>
+        <div class="card-body">
+            <form action="." method="POST">
+                {% csrf_token %}
+
+                <fieldset class="mb-4">
+                    <legend class="fs-4">Dados Pessoais</legend>
+                    <div class="row">
+                        {{ pessoa_form.as_div }}
+                    </div>
+                </fieldset>
+
+                <fieldset class="mb-4">
+                    <legend class="fs-4">Dados de Endereço</legend>
+                    <div class="row">
+                        {{ endereco_form.as_div }}
+                    </div>
+                </fieldset>
+
+                <fieldset class="mb-4">
+                    <legend class="fs-4">Dados do MEI</legend>
+                    <div class="row">
+                        {{ fornecedor_form.as_div }}
+                    </div>
+                </fieldset>
+
+                <div class="text-end">
+                    <button type="submit" class="btn btn-success">Cadastrar</button>
+                </div>
+            </form>
+        </div>
     </div>
+</div>
 {% endblock %}

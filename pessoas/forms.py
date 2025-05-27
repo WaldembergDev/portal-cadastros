@@ -8,6 +8,11 @@ class PessoaForm(forms.ModelForm):
         model = Pessoa
         fields = '__all__'
         exclude = ['data_cadastro', 'situacao']
+        labels = {
+            'cpf': 'CPF',
+            'possui_veiculo': 'Possui veículo',
+            'email': 'E-mail'
+        }
     
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -22,6 +27,10 @@ class EnderecoForm(forms.ModelForm):
         model = Endereco
         fields = '__all__'
         exclude = ['pessoa']
+        labels = {
+            'cep': 'CEP',
+            'numero': 'Número'
+        }
     
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
