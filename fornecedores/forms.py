@@ -1,8 +1,16 @@
 from django import forms
 from .models import Fornecedor
 
-class FronecedorForm(forms.ModelForm):
-    class meta:
+class FornecedorForm(forms.ModelForm):
+    class Meta:
         model = Fornecedor
         fields = '__all__'
         exclude = ['pessoa']
+    
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields.values():
+            if isinstance(field.widget, forms.CheckboxInput):
+                field.widget.attrs.update({'class': 'form-check-input'})
+            else:
+                field.widget.attrs.update({'class': 'form-control'})
