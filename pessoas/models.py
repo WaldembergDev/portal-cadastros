@@ -1,6 +1,7 @@
 from django.db import models
 import uuid
 
+
 # Create your models here.
 class Pessoa(models.Model):
     id = models.UUIDField(primary_key=True,
@@ -25,4 +26,40 @@ class Endereco(models.Model):
     bairro = models.CharField(max_length=50)
     cidade = models.CharField(max_length=50)
     estado = models.CharField(max_length=50)
-    fornecedor = models.OneToOneField(Pessoa, on_delete=models.CASCADE)
+    pessoa = models.OneToOneField(Pessoa, on_delete=models.CASCADE)
+
+# dados formação
+class FormacaoQualificacao(models.Model):
+    class AreaFormacaoEnum(models.TextChoices):
+        QUIMICA = 'Química'
+        BIOLOGIA = 'Biologia'
+        MEIO_AMBIENTE = 'Meio Ambiente'
+        OUTROS = 'Outros'
+    
+    class GrauFormacaoEnum(models.TextChoices):
+        TECNICO = 'Técnico'
+        TECNOLOGO = 'Tecnólogo'
+        GRADUACAO = 'Graduação'
+        POS_GRADUACAO = 'Pós-Graduação'
+        MESTRADO = 'Mestrado'
+        DOUTORADO = 'Doutorado'
+    
+    class RegistroConselhoClasseEnum(models.TextChoices):
+        NAO_POSSUI = 'Não Possui'
+        CRQ = 'CRQ'
+        CRBIO = 'CRBio'
+        CREA = 'CREA'
+        OUTRO = 'Outro'
+
+        
+    id = models.UUIDField(primary_key=True,
+                          default=uuid.uuid4,
+                          editable=False,
+                          unique=True)
+    area_formacao = models.CharField(max_length=30, choices=AreaFormacaoEnum)
+    grau_formacao = models.CharField(max_length=30, choices=GrauFormacaoEnum)
+    possui_registro_conselho_classe = models.CharField(max_length=30, choices=RegistroConselhoClasseEnum)
+    numero_registro_conselho_classe = models.CharField(max_length=30, null=True, blank=True)
+    registro_ativo_conselho_classe = models.BooleanField(null=True, blank=True)
+    pessoa = models.OneToOneField(Pessoa, on_delete=models.CASCADE)
+    
