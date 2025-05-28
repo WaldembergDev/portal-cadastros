@@ -12,15 +12,16 @@ class FornecedorForm(forms.ModelForm):
         labels = {
             'cnpj': 'CNPJ',
             'tempo_mei': 'Data de Cadastro do MEI',
-            'possui_conta_pj': 'Possui conta PJ',
+            'possui_conta_pj': 'Possui conta PJ (marque papra sim)',
             'cnae_principal': 'CNAE Principal',
             'cnae_secundario': 'CNAE Secundário',
-            'prestou_servicos_mei': 'Prestou serviços como MEI',
+            'prestou_servicos_mei': 'Prestou serviços como MEI (marque para sim)',
             'servicos_prestados': 'Serviços Prestados',
             'area_interesse': 'Área(s) de Interesse',
-            'possui_disponibilidade_servicos_eventuais': 'Possui disponibilidade para serviços eventuais ou sob demanda',
-            'atuou_em_laboratorio_analise_ambiental': 'Atuou em labotatório de análise ambiental',
-            'possui_cursos_area_ambiental': 'Possui cursos na área ambiental',
+            'possui_disponibilidade_servicos_eventuais': 'Possui disponibilidade para serviços eventuais ou sob demanda (marque para sim)',
+            'possui_smartphone': 'Possui smartphone (marque para sim)',
+            'atuou_em_laboratorio_analise_ambiental': 'Atuou em labotatório de análise ambiental (marque para sim)',
+            'possui_cursos_area_ambiental': 'Possui cursos na área ambiental (marque para sim)',
             'cursos_realizados': 'Cursos realizados na área ambiental',
             'observacoes': 'Observações - Neste campo coloque informações relevantes que o Grupo Quality precisa saber'
         }

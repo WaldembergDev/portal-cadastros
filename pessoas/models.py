@@ -18,7 +18,7 @@ class Pessoa(models.Model):
     cpf = models.CharField(max_length=14)
     telefone = models.CharField(max_length=11)
     email = models.CharField(max_length=50)
-    possui_veiculo = models.BooleanField()
+    possui_veiculo = models.BooleanField(null=True, blank=True, default=False)
     situacao = models.CharField(max_length=50, choices=SituacaoEnum, default=SituacaoEnum.PENDENTE)
     data_cadastro = models.DateTimeField(auto_now_add=True)
 
@@ -64,10 +64,10 @@ class FormacaoQualificacao(models.Model):
                           default=uuid.uuid4,
                           editable=False,
                           unique=True)
-    area_formacao = models.CharField(max_length=30, choices=AreaFormacaoEnum)
-    grau_formacao = models.CharField(max_length=30, choices=GrauFormacaoEnum)
-    possui_registro_conselho_classe = models.CharField(max_length=30, choices=RegistroConselhoClasseEnum)
+    area_formacao = models.CharField(max_length=30, choices=AreaFormacaoEnum.choices)
+    grau_formacao = models.CharField(max_length=30, choices=GrauFormacaoEnum.choices)
+    possui_registro_conselho_classe = models.CharField(max_length=30, choices=RegistroConselhoClasseEnum.choices)
     numero_registro_conselho_classe = models.CharField(max_length=30, null=True, blank=True)
-    registro_ativo_conselho_classe = models.BooleanField(null=True, blank=True)
+    registro_ativo_conselho_classe = models.BooleanField(null=True, blank=True, default=False)
     pessoa = models.OneToOneField(Pessoa, on_delete=models.CASCADE)
     

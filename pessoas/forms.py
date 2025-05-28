@@ -10,7 +10,7 @@ class PessoaForm(forms.ModelForm):
         exclude = ['data_cadastro', 'situacao']
         labels = {
             'cpf': 'CPF',
-            'possui_veiculo': 'Possui veículo',
+            'possui_veiculo': 'Possui veículo (marque para sim)',
             'email': 'E-mail'
         }
     
@@ -45,6 +45,12 @@ class FormacaoQualificacaoForm(forms.ModelForm):
         model = FormacaoQualificacao
         fields = '__all__'
         exclude = ['pessoa']
+        labels = {
+            'area_formacao': 'Área de Formação',
+            'grau_formacao': 'Grau de Formação',
+            'possui_registro_conselho_classe': 'Possui registro de conselho de classe',
+            'numero_registro_conselho_classe': 'Número do registro de conselho de classe'
+        }
     
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -53,5 +59,3 @@ class FormacaoQualificacaoForm(forms.ModelForm):
                 field.widget.attrs.update({'class': 'form-check-input'})
             else:
                 field.widget.attrs.update({'class': 'form-control'})
-
-
