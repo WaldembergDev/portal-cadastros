@@ -6,6 +6,7 @@ from pessoas.forms import FormacaoQualificacaoForm
 from django.contrib import messages
 from django.contrib.messages import constants
 from pessoas.models import Pessoa
+from django.contrib.auth.decorators import login_required
 
 # Create your views here
 def formulario_cadastro(request):
@@ -56,6 +57,7 @@ def formulario_cadastro(request):
         return redirect('/registros/')
 
 
+@login_required(login_url='/usuarios/login')
 def listar_cadastros(request):
     cadastros = Pessoa.objects.all()
     context = {
