@@ -9,7 +9,7 @@ class Pessoa(models.Model):
         ANALISANDO = 'Analisando'
         APROVADO = 'Aprovado'
         REPROVADO = 'Reprovado'
-    
+
     id = models.UUIDField(primary_key=True,
                           default=uuid.uuid4,
                           editable=False,
@@ -42,8 +42,10 @@ class FormacaoQualificacao(models.Model):
         QUIMICA = 'Química'
         BIOLOGIA = 'Biologia'
         MEIO_AMBIENTE = 'Meio Ambiente'
+        LOGISTICA = 'Logística'
+        COMERCIAL = 'Comercial'
         OUTROS = 'Outros'
-    
+
     class GrauFormacaoEnum(models.TextChoices):
         TECNICO = 'Técnico'
         TECNOLOGO = 'Tecnólogo'
@@ -51,7 +53,7 @@ class FormacaoQualificacao(models.Model):
         POS_GRADUACAO = 'Pós-Graduação'
         MESTRADO = 'Mestrado'
         DOUTORADO = 'Doutorado'
-    
+
     class RegistroConselhoClasseEnum(models.TextChoices):
         NAO_POSSUI = 'Não Possui'
         CRQ = 'CRQ'
@@ -59,15 +61,15 @@ class FormacaoQualificacao(models.Model):
         CREA = 'CREA'
         OUTRO = 'Outro'
 
-        
+
     id = models.UUIDField(primary_key=True,
                           default=uuid.uuid4,
                           editable=False,
                           unique=True)
-    area_formacao = models.CharField(max_length=30, choices=AreaFormacaoEnum.choices)
+    area_formacao = models.CharField(max_length=35, choices=AreaFormacaoEnum.choices)
+    text_formacao = models.CharField(null=True, blank=True)
     grau_formacao = models.CharField(max_length=30, choices=GrauFormacaoEnum.choices)
     possui_registro_conselho_classe = models.CharField(max_length=30, choices=RegistroConselhoClasseEnum.choices)
     numero_registro_conselho_classe = models.CharField(max_length=30, null=True, blank=True)
     registro_ativo_conselho_classe = models.BooleanField(null=True, blank=True, default=False)
     pessoa = models.OneToOneField(Pessoa, on_delete=models.CASCADE)
-    

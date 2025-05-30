@@ -12,20 +12,20 @@ class FornecedorForm(forms.ModelForm):
         labels = {
             'cnpj': 'CNPJ',
             'tempo_mei': 'Data de Cadastro do MEI',
-            'possui_conta_pj': 'Possui conta PJ (marque papra sim)',
+            'possui_conta_pj': 'Possui conta PJ',
             'cnae_principal': 'CNAE Principal',
             'cnae_secundario': 'CNAE Secundário',
-            'prestou_servicos_mei': 'Prestou serviços como MEI (marque para sim)',
+            'prestou_servicos_mei': 'Prestou serviços como MEI',
             'servicos_prestados': 'Serviços Prestados',
             'area_interesse': 'Área(s) de Interesse',
-            'possui_disponibilidade_servicos_eventuais': 'Possui disponibilidade para serviços eventuais ou sob demanda (marque para sim)',
-            'possui_smartphone': 'Possui smartphone (marque para sim)',
-            'atuou_em_laboratorio_analise_ambiental': 'Atuou em labotatório de análise ambiental (marque para sim)',
-            'possui_cursos_area_ambiental': 'Possui cursos na área ambiental (marque para sim)',
-            'cursos_realizados': 'Cursos realizados na área ambiental',
+            'possui_disponibilidade_servicos_eventuais': 'Possui disponibilidade para serviços eventuais ou sob demanda',
+            'possui_smartphone': 'Possui smartphone com sistema operacional Android para aceite das demandas do trabalho',
+            'atuou_em_laboratorio_analise_ambiental': 'Atuou em labotatório de análise ambiental',
+            'possui_cursos_area_ambiental': 'Possui cursos na área ambiental',
+            'cursos_realizados': 'Caso tenha respondido sim acima, informe os cursos realizados',
             'observacoes': 'Observações - Neste campo coloque informações relevantes que o Grupo Quality precisa saber'
         }
-    
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for field in self.fields.values():

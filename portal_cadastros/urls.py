@@ -16,9 +16,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.shortcuts import redirect
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('registros/', include('registros.urls')),
-    path('usuarios/', include('usuarios.urls'))
+    path('usuarios/', include('usuarios.urls')),
+    path('', lambda request: redirect('registros/'))
 ]

@@ -10,10 +10,10 @@ class PessoaForm(forms.ModelForm):
         exclude = ['data_cadastro', 'situacao']
         labels = {
             'cpf': 'CPF',
-            'possui_veiculo': 'Possui veículo (marque para sim)',
+            'possui_veiculo': 'Possui veículo',
             'email': 'E-mail'
         }
-    
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for field in self.fields.values():
@@ -31,7 +31,7 @@ class EnderecoForm(forms.ModelForm):
             'cep': 'CEP',
             'numero': 'Número'
         }
-    
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for field in self.fields.values():
@@ -49,9 +49,10 @@ class FormacaoQualificacaoForm(forms.ModelForm):
             'area_formacao': 'Área de Formação',
             'grau_formacao': 'Grau de Formação',
             'possui_registro_conselho_classe': 'Possui registro de conselho de classe',
-            'numero_registro_conselho_classe': 'Número do registro de conselho de classe'
+            'numero_registro_conselho_classe': 'Número do registro de conselho de classe',
+            'text_formacao': 'Caso tenha respondido outros acima, informe sua formação'
         }
-    
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for field in self.fields.values():

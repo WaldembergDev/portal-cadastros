@@ -18,12 +18,12 @@ class Fornecedor(models.Model):
                           default=uuid.uuid4,
                           editable=False,
                           unique=True)
-    cnpj = models.CharField(max_length=18)
-    nome_empresarial = models.CharField(max_length=120)
-    tempo_mei = models.DateField()
+    cnpj = models.CharField(max_length=18, null=True, blank=True)
+    nome_empresarial = models.CharField(max_length=120, null=True, blank=True)
+    tempo_mei = models.DateField(null=True, blank=True)
     possui_conta_pj = models.BooleanField(null=True, blank=True, default=False) # vinculada ao mei
-    cnae_principal = models.CharField(max_length=255)
-    cnae_secundario = models.CharField(max_length=255)
+    cnae_principal = models.CharField(max_length=255, null=True, blank=True)
+    cnae_secundario = models.CharField(max_length=255, null=True, blank=True)
     prestou_servicos_mei = models.BooleanField(null=True, default=False)
     servicos_prestados = models.TextField(null=True, blank=True)
     area_interesse = models.ManyToManyField(AreaInteresse)
