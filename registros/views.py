@@ -64,11 +64,17 @@ def listar_cadastros(request):
         'cadastros': cadastros
     }
     return render(request, 'listar_cadastros.html', context=context)
+
+
 # @login_required(login_url='/usuarios/login')
 def visualizacao_kanban(request):
     pessoas_pendentes = Pessoa.objects.filter(situacao = Pessoa.SituacaoEnum.PENDENTE)
+    pessoas_aprovadas = Pessoa.objects.filter(situacao = Pessoa.SituacaoEnum.APROVADO)
+    pessoas_reprovadas = Pessoa.objects.filter(situacao = Pessoa.SituacaoEnum.REPROVADO)
     context = {
-        'pessoas_pendentes': pessoas_pendentes
+        'pessoas_pendentes': pessoas_pendentes,
+        'pessoas_aprovadas': pessoas_aprovadas,
+        'pessoas_reprovadas': pessoas_reprovadas
     }
     return render(request, 'visualizacao_kanban.html', context=context)
 
