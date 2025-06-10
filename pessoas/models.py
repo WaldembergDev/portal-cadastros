@@ -25,6 +25,7 @@ class Pessoa(models.Model):
     possui_veiculo = models.CharField(max_length=3, choices=SimNaoEnum.choices)
     situacao = models.CharField(max_length=50, choices=SituacaoEnum.choices, default=SituacaoEnum.PENDENTE)
     data_cadastro = models.DateTimeField(auto_now_add=True)
+    email_enviado = models.BooleanField(default=False)
 
 # dados referente à localização
 class Endereco(models.Model):
