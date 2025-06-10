@@ -10,9 +10,9 @@ class SimNaoEnum(models.TextChoices):
 class Pessoa(models.Model):
     class SituacaoEnum(models.TextChoices):
         PENDENTE = 'PENDENTE', 'Pendente'
-        ANALISANDO = 'ANALISANDO', 'Analisando'
         APROVADO = 'APROVADO', 'Aprovado'
         REPROVADO = 'REPROVADO', 'Reprovado'
+        CONCLUIDO = 'CONCLUIDO', 'Concluído'
 
     id = models.UUIDField(primary_key=True,
                           default=uuid.uuid4,

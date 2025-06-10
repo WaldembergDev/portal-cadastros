@@ -71,10 +71,12 @@ def visualizacao_kanban(request):
     pessoas_pendentes = Pessoa.objects.filter(situacao = Pessoa.SituacaoEnum.PENDENTE)
     pessoas_aprovadas = Pessoa.objects.filter(situacao = Pessoa.SituacaoEnum.APROVADO)
     pessoas_reprovadas = Pessoa.objects.filter(situacao = Pessoa.SituacaoEnum.REPROVADO)
+    pessoas_concluidas = Pessoa.objects.filter(situacao = Pessoa.SituacaoEnum.APROVADO)
     context = {
         'pessoas_pendentes': pessoas_pendentes,
         'pessoas_aprovadas': pessoas_aprovadas,
-        'pessoas_reprovadas': pessoas_reprovadas
+        'pessoas_reprovadas': pessoas_reprovadas,
+        'pessoas_concluidas': pessoas_concluidas
     }
     return render(request, 'visualizacao_kanban.html', context=context)
 
