@@ -57,15 +57,23 @@ def formulario_cadastro(request):
         return render(request, 'cadastro.html', context=context)
 
 
-@login_required(login_url='/usuarios/login')
+# @login_required(login_url='/usuarios/login')
 def listar_cadastros(request):
     cadastros = Pessoa.objects.all()
     context = {
         'cadastros': cadastros
     }
     return render(request, 'listar_cadastros.html', context=context)
+# @login_required(login_url='/usuarios/login')
+def visualizacao_kanban(request):
+    pessoas_pendentes = Pessoa.objects.filter(situacao = Pessoa.SituacaoEnum.PENDENTE)
+    context = {
+        'pessoas_pendentes': pessoas_pendentes
+    }
+    return render(request, 'visualizacao_kanban.html', context=context)
 
-@login_required(login_url="/usuarios/login")
+
+# @login_required(login_url="/usuarios/login")
 def visualizar_cadastro(request, id):
     pessoa = Pessoa.objects.get(id=id)
     context = {
