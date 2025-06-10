@@ -27,8 +27,7 @@ def formulario_cadastro(request):
         endereco_form = EnderecoForm(request.POST)
         fornecedor_form = FornecedorForm(request.POST)
         formacao_form = FormacaoQualificacaoForm(request.POST)
-        if not fornecedor_form.is_valid():
-            print("Erros FornecedorForm:", fornecedor_form.errors) # <--- ISSO VAI TE MOSTRAR O PROBLEMA
+        # verificando se os formulários estão válidos
         if pessoa_form.is_valid() and endereco_form.is_valid() and fornecedor_form.is_valid() and formacao_form.is_valid():
             pessoa = pessoa_form.save()
             endereco = endereco_form.save(commit=False)
@@ -48,13 +47,13 @@ def formulario_cadastro(request):
             context = {
                 'pessoa_form': pessoa_form,
                 'endereco_form': endereco_form,
-                'fornecedor_form': fornecedor,
+                'fornecedor_form': fornecedor_form,
                 'formacao_form': formacao_form
             }
             messages.add_message(request, constants.SUCCESS, 'Dados registrados com sucesso!')
             return redirect('/registros/')
         messages.add_message(request, constants.WARNING, 'Erro ao registrar os dados! Tente novamente.')
-        return redirect('/registros/')
+        return render(request, 'cadastro.html', context=context)
 
 
 @login_required(login_url='/usuarios/login')

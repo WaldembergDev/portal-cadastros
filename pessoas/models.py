@@ -1,14 +1,18 @@
 from django.db import models
 import uuid
 
+class SimNaoEnum(models.TextChoices):
+    NAO = 'NAO', 'Não'
+    SIM = 'SIM', 'Sim'
+
 
 # Create your models here.
 class Pessoa(models.Model):
     class SituacaoEnum(models.TextChoices):
-        PENDENTE = 'Pendente'
-        ANALISANDO = 'Analisando'
-        APROVADO = 'Aprovado'
-        REPROVADO = 'Reprovado'
+        PENDENTE = 'PENDENTE', 'Pendente'
+        ANALISANDO = 'ANALISANDO', 'Analisando'
+        APROVADO = 'APROVADO', 'Aprovado'
+        REPROVADO = 'REPROVADO', 'Reprovado'
 
     id = models.UUIDField(primary_key=True,
                           default=uuid.uuid4,
@@ -18,8 +22,8 @@ class Pessoa(models.Model):
     cpf = models.CharField(max_length=14)
     telefone = models.CharField(max_length=11)
     email = models.CharField(max_length=50)
-    possui_veiculo = models.BooleanField(null=True, blank=True, default=False)
-    situacao = models.CharField(max_length=50, choices=SituacaoEnum, default=SituacaoEnum.PENDENTE)
+    possui_veiculo = models.CharField(max_length=3, choices=SimNaoEnum.choices)
+    situacao = models.CharField(max_length=50, choices=SituacaoEnum.choices, default=SituacaoEnum.PENDENTE)
     data_cadastro = models.DateTimeField(auto_now_add=True)
 
 # dados referente à localização
@@ -39,27 +43,28 @@ class Endereco(models.Model):
 # dados formação
 class FormacaoQualificacao(models.Model):
     class AreaFormacaoEnum(models.TextChoices):
-        QUIMICA = 'Química'
-        BIOLOGIA = 'Biologia'
-        MEIO_AMBIENTE = 'Meio Ambiente'
-        LOGISTICA = 'Logística'
-        COMERCIAL = 'Comercial'
-        OUTROS = 'Outros'
+        QUIMICA = 'QUIMICA', 'Química'
+        BIOLOGIA = 'BIOLOGIA', 'Biologia'
+        MEIO_AMBIENTE = 'MEIO_AMBIENTE', 'Meio Ambiente'
+        LOGISTICA = 'LOGISTICA', 'Logística'
+        COMERCIAL = 'COMERCIAL', 'Comercial'
+        OUTROS = 'OUTROS', 'Outros'
 
     class GrauFormacaoEnum(models.TextChoices):
-        TECNICO = 'Técnico'
-        TECNOLOGO = 'Tecnólogo'
-        GRADUACAO = 'Graduação'
-        POS_GRADUACAO = 'Pós-Graduação'
-        MESTRADO = 'Mestrado'
-        DOUTORADO = 'Doutorado'
+        ENSINO_MEDIO = 'ENSINO_MEDIO', 'Ensino Médio'
+        TECNICO = 'TECNICO', 'Técnico'
+        TECNOLOGO = 'TECNOLOGO', 'Tecnólogo'
+        GRADUACAO = 'GRADUACAO', 'Graduação'
+        POS_GRADUACAO = 'POS_GRADUACAO', 'Pós-Graduação'
+        MESTRADO = 'MESTRADO', 'Mestrado'
+        DOUTORADO = 'DOUTORADO', 'Doutorado'
 
     class RegistroConselhoClasseEnum(models.TextChoices):
-        NAO_POSSUI = 'Não Possui'
-        CRQ = 'CRQ'
-        CRBIO = 'CRBio'
-        CREA = 'CREA'
-        OUTRO = 'Outro'
+        NAO_POSSUI = 'NAO_POSSUI', 'Não Possui'
+        CRQ = 'CRQ', 'CRQ'
+        CRBIO = 'CRBIO', 'CRBio'
+        CREA = 'CREA', 'CREA'
+        OUTRO = 'OUTRO', 'Outro'
 
 
     id = models.UUIDField(primary_key=True,
@@ -71,5 +76,5 @@ class FormacaoQualificacao(models.Model):
     grau_formacao = models.CharField(max_length=30, choices=GrauFormacaoEnum.choices)
     possui_registro_conselho_classe = models.CharField(max_length=30, choices=RegistroConselhoClasseEnum.choices)
     numero_registro_conselho_classe = models.CharField(max_length=30, null=True, blank=True)
-    registro_ativo_conselho_classe = models.BooleanField(null=True, blank=True, default=False)
+    registro_ativo_conselho_classe = models.CharField(max_length=3, choices=SimNaoEnum.choices)
     pessoa = models.OneToOneField(Pessoa, on_delete=models.CASCADE)
