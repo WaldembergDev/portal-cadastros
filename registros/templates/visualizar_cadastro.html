@@ -2,10 +2,9 @@
 {% block title %}Visualizar Cadastro{% endblock %}
 {% block content %}
     <div class="container">
-        <h1 class="text-center">Cadastro de {{ pessoa.nome_completo }}</h1>
+        <h1 class="text-center">{{ pessoa.nome_completo }}</h1>
         <hr>
-        <p>Data de Cadastro: {{ pessoa.data_cadastro }}</p>
-        <p>Nome: {{ pessoa.nome_completo }}</p>        
+        <p>Data de Cadastro: {{ pessoa.data_cadastro }}</p>  
         <p>CPF: {{ pessoa.cpf }}</p>    
         <p>Telefone: {{ pessoa.telefone }}</p>
         <p>E-mail: {{ pessoa.email }}</p>
@@ -18,7 +17,7 @@
         <p>Cidade: {{ pessoa.endereco.cidade }}</p>
         <p>Estado: {{ pessoa.endereco.estado }}</p>
         <hr>
-        <p>Área de formação: {{ pessoa.formacaoqualificacao.area_formacao }}</p>
+        <p>Área de formação: {{ pessoa.formacaoqualificacao.get_area_formacao_display }}</p>
         <p>Texto Formação: {% if not pessoa.formacaoqualificacao.text_formacao %} Campo não preenchido
             {% else %} {{ pessoa.formacaoqualificacao.text_formacao }}
             {% endif %} </p>
