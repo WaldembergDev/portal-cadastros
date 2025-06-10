@@ -1,53 +1,151 @@
 {% extends 'base.html' %}
 {% block title %}Visualizar Cadastro{% endblock %}
+
 {% block content %}
-    <div class="container">
-        <h1 class="text-center">{{ pessoa.nome_completo }}</h1>
-        <hr>
-        <p>Data de Cadastro: {{ pessoa.data_cadastro }}</p>  
-        <p>CPF: {{ pessoa.cpf }}</p>    
-        <p>Telefone: {{ pessoa.telefone }}</p>
-        <p>E-mail: {{ pessoa.email }}</p>
-        <p>Possui veículo: {{ pessoa.get_possui_veiculo_display }}</p>
-        <p>Situação: {{ pessoa.get_situacao_display }}</p>
-        <hr>
-        <p>Logradouro: {{ pessoa.endereco.logradouro }}</p>
-        <p>Número: {{ pessoa.endereco.numero }}</p>
-        <p>Bairro: {{ pessoa.endereco.bairro }}</p>
-        <p>Cidade: {{ pessoa.endereco.cidade }}</p>
-        <p>Estado: {{ pessoa.endereco.estado }}</p>
-        <hr>
-        <p>Área de formação: {{ pessoa.formacaoqualificacao.get_area_formacao_display }}</p>
-        <p>Texto Formação: {% if not pessoa.formacaoqualificacao.text_formacao %} Campo não preenchido
-            {% else %} {{ pessoa.formacaoqualificacao.text_formacao }}
-            {% endif %} </p>
-        <p>Grau de Formação: {{ pessoa.formacaoqualificacao.get_grau_formacao_display }}</p>
-        <p>Possui Registro de Conselho de Classe: {{ pessoa.formacaoqualificacao.get_possui_registro_conselho_classe_display }}</p>
-        <p>Número do registro de Conselho de Classe: {% if not pessoa.formacaoqualificacao.numero_registro_conselho_classe %} Campo não preenchido
-            {% else %} {{ pessoa.formacaoqualificacao.numero_registro_conselho_classe }} {% endif %}</p>
-        <p>Registro ativo: {{ pessoa.formacaoqualificacao.get_registro_ativo_conselho_classe_display }}</p>
-        <hr>
-        <p>CNPJ: {{ pessoa.fornecedor.cnpj }}</p>
-        <p>Nome Empresaria: {{ pessoa.fornecedor.nome_empresarial }}</p>
-        <p>Data de cadastro do MEI: {{ pessoa.fornecedor.tempo_mei }}</p>
-        <p>Possui Conta PJ: {{ pessoa.fornecedor.get_possui_conta_pj_display }}</p>
-        <p>CNAE Principal: {{ pessoa.fornecedor.cnae_principal }}</p>
-        <p>CNAE Secundário: {{ pessoa.fornecedor.cnae_secundario }}</p>
-        <p>Prestou Servicos MEI: {{ pessoa.fornecedor.get_prestou_servicos_mei_display }}</p>
-        <p>Serviços Prestados: {{ pessoa.fornecedor.servicos_prestados }}</p>
-        <p>Área(s) de interesse: 
-            {% for area in pessoa.fornecedor.area_interesse.all %}
-                {{ area }},  
-            {% endfor %}
-        </p>
-        <p>Possui disponibilidade para serviços eventuais: 
-            {{ pessoa.fornecedor.get_possui_disponibilidade_servicos_eventuais_display }}
-        </p>
-        <p>Possui smartphone: {{ pessoa.fornecedor.get_possui_smartphone_display }}</p>
-        <p>Atuou em laboratório de análises ambientais: 
-            {{ pessoa.fornecedor.atuou_em_laboratorio_analise_ambiental }}
-        </p>
-        <p>Cursos realizados: {{ pessoa.fornecedor.cursos_realizados }}</p>
-        <p>Observações: {{ pessoa.fornecedor.observacoes }}</p>
-    </div>
-{% endblock%}
+    <div class="container py-4"> {# Adiciona um padding vertical #}
+        <h1 class="text-center mb-4">{{ pessoa.nome_completo }}</h1> {# Título centralizado com margem inferior #}
+        <p class="text-center text-muted lead mb-5">Detalhes completos do registro</p> {# Subtítulo descritivo #}
+
+        {# Grupo de Cards #}
+        <div class="row g-4"> {# row com gutter para espaçamento entre cards #}
+
+            {# Card: Dados Pessoais #}
+            <div class="col-md-6"> {# Ocupa 6 colunas em telas médias+, metade da largura #}
+                <div class="card shadow-sm h-100"> {# h-100 faz o card ocupar 100% da altura do grupo #}
+                    <div class="card-header bg-primary text-white">
+                        <h4 class="mb-0">Informações Pessoais</h4>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text mb-1"><strong>Data de Cadastro:</strong> {{ pessoa.data_cadastro|date:"d/m/Y" }}</p> {# Formata a data #}
+                        <p class="card-text mb-1"><strong>CPF:</strong> {{ pessoa.cpf }}</p>    
+                        <p class="card-text mb-1"><strong>Telefone:</strong> {{ pessoa.telefone }}</p>
+                        <p class="card-text mb-1"><strong>E-mail:</strong> {{ pessoa.email }}</p>
+                        <p class="card-text mb-1"><strong>Possui veículo:</strong> 
+                            <span class="badge {% if pessoa.possui_veiculo == 'SIM' %}bg-success{% else %}bg-secondary{% endif %}">
+                                {{ pessoa.get_possui_veiculo_display }}
+                            </span>
+                        </p>
+                        <p class="card-text mb-0"><strong>Situação:</strong> 
+                            <span class="badge {% if pessoa.situacao == 'PENDENTE' %}bg-warning text-dark{% elif pessoa.situacao == 'APROVADO' %}bg-success{% else %}bg-danger{% endif %}">
+                                {{ pessoa.get_situacao_display }}
+                            </span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            {# Card: Endereço #}
+            <div class="col-md-6">
+                <div class="card shadow-sm h-100">
+                    <div class="card-header bg-info text-white">
+                        <h4 class="mb-0">Endereço</h4>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text mb-1"><strong>Logradouro:</strong> {{ pessoa.endereco.logradouro }}</p>
+                        <p class="card-text mb-1"><strong>Número:</strong> {{ pessoa.endereco.numero }}</p>
+                        <p class="card-text mb-1"><strong>Bairro:</strong> {{ pessoa.endereco.bairro }}</p>
+                        <p class="card-text mb-1"><strong>Cidade:</strong> {{ pessoa.endereco.cidade }}</p>
+                        <p class="card-text mb-0"><strong>Estado:</strong> {{ pessoa.endereco.estado }}</p>
+                    </div>
+                </div>
+            </div>
+
+            {# Card: Formação e Qualificação #}
+            <div class="col-md-12 mt-4"> {# Ocupa 12 colunas em telas médias+, largura total #}
+                <div class="card shadow-sm">
+                    <div class="card-header bg-dark text-white">
+                        <h4 class="mb-0">Formação e Qualificação</h4>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text mb-1"><strong>Área de Formação:</strong> {{ pessoa.formacaoqualificacao.get_area_formacao_display }}</p>
+                        <p class="card-text mb-1"><strong>Texto Formação:</strong> 
+                            {% if not pessoa.formacaoqualificacao.text_formacao %} 
+                                <span class="text-muted">Campo não preenchido</span>
+                            {% else %} 
+                                {{ pessoa.formacaoqualificacao.text_formacao }}
+                            {% endif %} 
+                        </p>
+                        <p class="card-text mb-1"><strong>Grau de Formação:</strong> {{ pessoa.formacaoqualificacao.get_grau_formacao_display }}</p>
+                        <p class="card-text mb-1"><strong>Possui Registro de Conselho de Classe:</strong> {{ pessoa.formacaoqualificacao.get_possui_registro_conselho_classe_display }}</p>
+                        <p class="card-text mb-1"><strong>Número do Registro:</strong> 
+                            {% if not pessoa.formacaoqualificacao.numero_registro_conselho_classe %} 
+                                <span class="text-muted">Campo não preenchido</span>
+                            {% else %} 
+                                {{ pessoa.formacaoqualificacao.numero_registro_conselho_classe }} 
+                            {% endif %}
+                        </p>
+                        <p class="card-text mb-0"><strong>Registro ativo:</strong> 
+                            <span class="badge {% if pessoa.formacaoqualificacao.registro_ativo_conselho_classe %}bg-success{% else %}bg-danger{% endif %}">
+                                {% if pessoa.formacaoqualificacao.registro_ativo_conselho_classe %}Sim{% else %}Não{% endif %}
+                            </span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            {# Card: Detalhes do Fornecedor #}
+            <div class="col-md-12 mt-4">
+                <div class="card shadow-sm">
+                    <div class="card-header bg-secondary text-white">
+                        <h4 class="mb-0">Detalhes do Fornecedor</h4>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text mb-1"><strong>CNPJ:</strong> {% if not pessoa.fornecedor.cnpj %} <span class="text-muted">Não informado</span> {% else %} {{ pessoa.fornecedor.cnpj }} {% endif %}</p>
+                        <p class="card-text mb-1"><strong>Nome Empresarial:</strong> {% if not pessoa.fornecedor.nome_empresarial %} <span class="text-muted">Não informado</span> {% else %} {{ pessoa.fornecedor.nome_empresarial }} {% endif %}</p>
+                        <p class="card-text mb-1"><strong>Data de cadastro do MEI:</strong> {% if not pessoa.fornecedor.tempo_mei %} <span class="text-muted">Não informado</span> {% else %} {{ pessoa.fornecedor.tempo_mei|date:"d/m/Y" }} {% endif %}</p>
+                        <p class="card-text mb-1"><strong>Possui Conta PJ:</strong> 
+                            <span class="badge {% if pessoa.fornecedor.possui_conta_pj == 'SIM' %}bg-success{% else %}bg-danger{% endif %}">
+                                {{ pessoa.fornecedor.get_possui_conta_pj_display }}
+                            </span>
+                        </p>
+                        <p class="card-text mb-1"><strong>CNAE Principal:</strong> {% if not pessoa.fornecedor.cnae_principal %} <span class="text-muted">Não informado</span> {% else %} {{ pessoa.fornecedor.cnae_principal }} {% endif %}</p>
+                        <p class="card-text mb-1"><strong>CNAE Secundário:</strong> {% if not pessoa.fornecedor.cnae_secundario %} <span class="text-muted">Não informado</span> {% else %} {{ pessoa.fornecedor.cnae_secundario }} {% endif %}</p>
+                        <p class="card-text mb-1"><strong>Prestou Serviços MEI:</strong> 
+                            <span class="badge {% if pessoa.fornecedor.prestou_servicos_mei == 'SIM' %}bg-success{% else %}bg-danger{% endif %}">
+                                {{ pessoa.fornecedor.get_prestou_servicos_mei_display }}
+                            </span>
+                        </p>
+                        <p class="card-text mb-1"><strong>Serviços Prestados:</strong> {% if not pessoa.fornecedor.servicos_prestados %} <span class="text-muted">Não informado</span> {% else %} {{ pessoa.fornecedor.servicos_prestados }} {% endif %}</p>
+                        
+                        <p class="card-text mb-1"><strong>Área(s) de Interesse:</strong> 
+                            {% if pessoa.fornecedor.area_interesse.all %}
+                                <ul class="list-unstyled d-inline"> {# list-unstyled remove bullets, d-inline para ficar na mesma linha #}
+                                    {% for area in pessoa.fornecedor.area_interesse.all %}
+                                        <li class="badge bg-primary me-1 mb-1 d-inline-block">{{ area.nome }}</li> {# Um badge para cada item #}
+                                    {% endfor %}
+                                </ul>
+                            {% else %}
+                                <span class="text-muted">Não informado</span>
+                            {% endif %}
+                        </p>
+                        
+                        <p class="card-text mb-1"><strong>Disponibilidade para Serviços Eventuais:</strong> 
+                            <span class="badge {% if pessoa.fornecedor.possui_disponibilidade_servicos_eventuais == 'SIM' %}bg-success{% else %}bg-danger{% endif %}">
+                                {{ pessoa.fornecedor.get_possui_disponibilidade_servicos_eventuais_display }}
+                            </span>
+                        </p>
+                        <p class="card-text mb-1"><strong>Possui Smartphone:</strong> 
+                            <span class="badge {% if pessoa.fornecedor.possui_smartphone == 'SIM' %}bg-success{% else %}bg-danger{% endif %}">
+                                {{ pessoa.fornecedor.get_possui_smartphone_display }}
+                            </span>
+                        </p>
+                        <p class="card-text mb-1"><strong>Atuou em laboratório de análises ambientais:</strong> 
+                            <span class="badge {% if pessoa.fornecedor.atuou_em_laboratorio_analise_ambiental %}bg-success{% else %}bg-danger{% endif %}">
+                                {% if pessoa.fornecedor.atuou_em_laboratorio_analise_ambiental %}Sim{% else %}Não{% endif %}
+                            </span>
+                        </p>
+                        <p class="card-text mb-1"><strong>Cursos realizados:</strong> {% if not pessoa.fornecedor.cursos_realizados %} <span class="text-muted">Não informado</span> {% else %} {{ pessoa.fornecedor.cursos_realizados }} {% endif %}</p>
+                        <p class="card-text mb-0"><strong>Observações:</strong> {% if not pessoa.fornecedor.observacoes %} <span class="text-muted">Não informado</span> {% else %} {{ pessoa.fornecedor.observacoes }} {% endif %}</p>
+                    </div>
+                </div>
+            </div>
+
+        </div> {# Fim da row #}
+
+        {# Botão de Voltar #}
+        <div class="text-center mt-5">
+            <a href="{% url 'listar_cadastros' %}" class="btn btn-outline-secondary">Voltar para a Lista</a>
+        </div>
+
+    </div> {# Fim do container #}
+{% endblock %}
