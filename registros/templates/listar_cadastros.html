@@ -2,8 +2,8 @@
 {% block title %}Listar Cadastros{% endblock %}
 {% block content %}
 <div class="container">
-  <h1>Lista de cadastros</h1>
-  <table class="table table-dark table-hover">
+  <h1 class="display-2 text-center">Lista de cadastros</h1>
+  <table class="table table-striped table-hover">
     <thead>
       <tr>
         <th scope="col">#</th>
@@ -12,6 +12,7 @@
         <th scope="col">Telefone</th>
         <th scope="col">Bairro</th>
         <th scope="col">Cidade</th>
+        <th scope="col">Ações</th>
       </tr>
     </thead>
     {% for cadastro in cadastros %}
@@ -22,6 +23,7 @@
         <th scope="col">{{ cadastro.telefone }}</th>
         <th scope="col">{{ cadastro.endereco.bairro }}</th>
         <th scope="col">{{ cadastro.endereco.cidade}}</th>
+        <th scope="col"><a href="#">Visualizar</a></th>
     </tbody>
     {% endfor %}
   </table>

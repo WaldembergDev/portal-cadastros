@@ -64,3 +64,12 @@ def listar_cadastros(request):
         'cadastros': cadastros
     }
     return render(request, 'listar_cadastros.html', context=context)
+
+@login_required(login_url="/usuarios/login")
+def visualizar_cadastro(request, id):
+    pessoa = Pessoa.objects.get(id=id)
+    context = {
+        'pessoa': pessoa
+    }
+    return render(request, 'visualizar_cadastro', context=context)
+    
