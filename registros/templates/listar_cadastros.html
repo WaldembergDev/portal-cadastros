@@ -1,10 +1,29 @@
 {% extends 'base.html' %}
 {% block title %}Listar Cadastros{% endblock %}
 {% block content %}
-    <div>
-        <h1>Lista de cadastros</h1>
-        {% for cadastro in cadastros %}
-            <p>{{cadastro}}</p>
-        {% endfor %}
-    </div>
+<div class="container">
+  <h1>Lista de cadastros</h1>
+  <table class="table table-dark table-hover">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Cadastro</th>
+        <th scope="col">Nome</th>
+        <th scope="col">Telefone</th>
+        <th scope="col">Bairro</th>
+        <th scope="col">Cidade</th>
+      </tr>
+    </thead>
+    {% for cadastro in cadastros %}
+    <tbody>
+        <th scope="col">{{ forloop.counter }}</th>
+        <th scope="col">{{ cadastro.data_cadastro }}</th>
+        <th scope="col">{{ cadastro.nome_completo }}</th>
+        <th scope="col">{{ cadastro.telefone }}</th>
+        <th scope="col">{{ cadastro.endereco.bairro }}</th>
+        <th scope="col">{{ cadastro.endereco.cidade}}</th>
+    </tbody>
+    {% endfor %}
+  </table>
+</div>
 {% endblock %}
