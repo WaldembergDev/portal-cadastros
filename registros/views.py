@@ -57,7 +57,7 @@ def formulario_cadastro(request):
         return render(request, 'cadastro.html', context=context)
 
 
-@login_required(login_url='/usuarios/login')
+# @login_required(login_url='/usuarios/login')
 def listar_cadastros(request):
     cadastros = Pessoa.objects.all()
     context = {
@@ -65,11 +65,11 @@ def listar_cadastros(request):
     }
     return render(request, 'listar_cadastros.html', context=context)
 
-@login_required(login_url="/usuarios/login")
+# @login_required(login_url="/usuarios/login")
 def visualizar_cadastro(request, id):
     pessoa = Pessoa.objects.get(id=id)
     context = {
         'pessoa': pessoa
     }
-    return render(request, 'visualizar_cadastro', context=context)
+    return render(request, 'visualizar_cadastro.html', context=context)
     

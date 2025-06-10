@@ -1,5 +1,54 @@
 {% extends 'base.html' %}
 {% block title %}Visualizar Cadastro{% endblock %}
 {% block content %}
-
+    <div class="container">
+        <h1 class="text-center">Cadastro de {{ pessoa.nome_completo }}</h1>
+        <hr>
+        <p>Data de Cadastro: {{ pessoa.data_cadastro }}</p>
+        <p>Nome: {{ pessoa.nome_completo }}</p>        
+        <p>CPF: {{ pessoa.cpf }}</p>    
+        <p>Telefone: {{ pessoa.telefone }}</p>
+        <p>E-mail: {{ pessoa.email }}</p>
+        <p>Possui veículo: {{ pessoa.get_possui_veiculo_display }}</p>
+        <p>Situação: {{ pessoa.get_situacao_display }}</p>
+        <hr>
+        <p>Logradouro: {{ pessoa.endereco.logradouro }}</p>
+        <p>Número: {{ pessoa.endereco.numero }}</p>
+        <p>Bairro: {{ pessoa.endereco.bairro }}</p>
+        <p>Cidade: {{ pessoa.endereco.cidade }}</p>
+        <p>Estado: {{ pessoa.endereco.estado }}</p>
+        <hr>
+        <p>Área de formação: {{ pessoa.formacaoqualificacao.area_formacao }}</p>
+        <p>Texto Formação: {% if not pessoa.formacaoqualificacao.text_formacao %} Campo não preenchido
+            {% else %} {{ pessoa.formacaoqualificacao.text_formacao }}
+            {% endif %} </p>
+        <p>Grau de Formação: {{ pessoa.formacaoqualificacao.get_grau_formacao_display }}</p>
+        <p>Possui Registro de Conselho de Classe: {{ pessoa.formacaoqualificacao.get_possui_registro_conselho_classe_display }}</p>
+        <p>Número do registro de Conselho de Classe: {% if not pessoa.formacaoqualificacao.numero_registro_conselho_classe %} Campo não preenchido
+            {% else %} {{ pessoa.formacaoqualificacao.numero_registro_conselho_classe }} {% endif %}</p>
+        <p>Registro ativo: {{ pessoa.formacaoqualificacao.get_registro_ativo_conselho_classe_display }}</p>
+        <hr>
+        <p>CNPJ: {{ pessoa.fornecedor.cnpj }}</p>
+        <p>Nome Empresaria: {{ pessoa.fornecedor.nome_empresarial }}</p>
+        <p>Data de cadastro do MEI: {{ pessoa.fornecedor.tempo_mei }}</p>
+        <p>Possui Conta PJ: {{ pessoa.fornecedor.get_possui_conta_pj_display }}</p>
+        <p>CNAE Principal: {{ pessoa.fornecedor.cnae_principal }}</p>
+        <p>CNAE Secundário: {{ pessoa.fornecedor.cnae_secundario }}</p>
+        <p>Prestou Servicos MEI: {{ pessoa.fornecedor.get_prestou_servicos_mei_display }}</p>
+        <p>Serviços Prestados: {{ pessoa.fornecedor.servicos_prestados }}</p>
+        <p>Área(s) de interesse: 
+            {% for area in pessoa.fornecedor.area_interesse.all %}
+                {{ area }},  
+            {% endfor %}
+        </p>
+        <p>Possui disponibilidade para serviços eventuais: 
+            {{ pessoa.fornecedor.get_possui_disponibilidade_servicos_eventuais_display }}
+        </p>
+        <p>Possui smartphone: {{ pessoa.fornecedor.get_possui_smartphone_display }}</p>
+        <p>Atuou em laboratório de análises ambientais: 
+            {{ pessoa.fornecedor.atuou_em_laboratorio_analise_ambiental }}
+        </p>
+        <p>Cursos realizados: {{ pessoa.fornecedor.cursos_realizados }}</p>
+        <p>Observações: {{ pessoa.fornecedor.observacoes }}</p>
+    </div>
 {% endblock%}

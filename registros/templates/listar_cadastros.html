@@ -23,7 +23,7 @@
         <th scope="col">{{ cadastro.telefone }}</th>
         <th scope="col">{{ cadastro.endereco.bairro }}</th>
         <th scope="col">{{ cadastro.endereco.cidade}}</th>
-        <th scope="col"><a href="#">Visualizar</a></th>
+        <th scope="col"><a href="{% url 'visualizar_cadastro' cadastro.id %}">Visualizar</a></th>
     </tbody>
     {% endfor %}
   </table>
