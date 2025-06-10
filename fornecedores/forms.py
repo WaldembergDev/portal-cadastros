@@ -1,3 +1,4 @@
+from dataclasses import field
 from django import forms
 from .models import Fornecedor
 
@@ -38,3 +39,6 @@ class FornecedorForm(forms.ModelForm):
             # Para o ManyToManyField (area_interesse), se quiser classe:
             if isinstance(field.widget, forms.SelectMultiple):
                  field.widget.attrs.update({'class': 'form-select', 'size':'5'}) # Exemplo de classe e tamanho
+                #  self.fields['area_interesse'].widget = forms.CheckboxSelectMultiple()
+
+

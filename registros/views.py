@@ -19,7 +19,7 @@ def formulario_cadastro(request):
             'fornecedor_form': fornecedor_form,
             'pessoa_form': pessoa_form,
             'endereco_form': endereco_form,
-            'formacao_form': formacao_form
+            'formacao_form': formacao_form,
         }
         return render(request, 'cadastro.html', context=context)
     else:
@@ -38,6 +38,7 @@ def formulario_cadastro(request):
             formacao.pessoa = pessoa
             endereco.save()
             fornecedor.save()
+            fornecedor_form.save_m2m()
             formacao.save()
             # limpando o formulário após salvar os dados
             pessoa_form = PessoaForm()
