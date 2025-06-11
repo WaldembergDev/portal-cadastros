@@ -101,6 +101,7 @@ def visualizar_cadastro(request, id):
 
 # @login_required(login_url="/usuarios/login")
 def disparar_emails(request):
+    # obtendo apenas as pessoas que estão com e-mail - false
     pessoas_pendentes = Pessoa.objects.filter(email_enviado = False)
     # disparando o e-mail para quem está com aprovado
     pessoas_aprovadas = pessoas_pendentes.filter(situacao = Pessoa.SituacaoEnum.APROVADO)

@@ -153,3 +153,5 @@ DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL')
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
 
+# configuração da API do google
+MAPS_API_KEY = os.getenv('MAPS_API_KEY')
