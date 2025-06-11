@@ -96,4 +96,24 @@ def visualizar_cadastro(request, id):
         'pessoa': pessoa
     }
     return render(request, 'visualizar_cadastro.html', context=context)
+
+# @login_required(login_url="/usuarios/login")
+def disparar_emails(request):
+    pessoas_pendentes = Pessoa.objects.filter(email_enviado = False)
+    # disparando o e-mail para quem está com aprovado
+    pessoas_aprovadas = pessoas_pendentes.filter(situacao = Pessoa.SituacaoEnum.APROVADO.value)
+    for pessoa in pessoas_aprovadas:
+        # definindo os dados para enviar o e-amil
+        email_destinatario = pessoa.email
+        tipo_email = TipoEmail.CADASTRO_APROVADO
+        nome_destinatario = pessoa.nome_completo
+        enviar_email(tipo_email, email_destinatario, nome_destinatario)
+    # disparando o e-mail para quem está reprovado
+    
+    # retornando o usuário para a mesma página
+    pessoas_aprovadas = pessoas_pendentes.filter(situacao = Pessoa.SituacaoEnum.REPROVADO.value)
+    messages.add_message(request, constants.SUCCESS, 'E-mails enviados com sucesso!')
+    
+    return redirect('')
+    
     
