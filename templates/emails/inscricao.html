@@ -1,0 +1,9 @@
+{% extends 'emails/base_email.html' %}
+{% block title %}Confirmação de Inscrição - Grupo Quality Ambiental{% endblock %}
+{% block email_content %}
+<p>Olá, {{ nome_usuario }}!</p>
+<p>Sua inscrição foi <strong>confirmada com sucesso</strong>!</p>
+<p>Agradecemos seu interesse. Em breve, nossa equipe entrará em contato com mais informações sobre sua inscrição.</p>
+<p>Atenciosamente,</p>
+<p>Grupo Quality Ambiental</p>
+{% endblock %}

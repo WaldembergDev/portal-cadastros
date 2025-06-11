@@ -2,16 +2,16 @@
 {% block title %}Visualizar Cadastro{% endblock %}
 
 {% block content %}
-    <div class="container py-4"> {# Adiciona um padding vertical #}
-        <h1 class="text-center mb-4">{{ pessoa.nome_completo }}</h1> {# Título centralizado com margem inferior #}
-        <p class="text-center text-muted lead mb-5">Detalhes completos do registro</p> {# Subtítulo descritivo #}
+    <div class="container py-4"> 
+        <h1 class="text-center mb-4">{{ pessoa.nome_completo }}</h1> 
+        <p class="text-center text-muted lead mb-5">Detalhes completos do registro</p> 
 
         {# Grupo de Cards #}
-        <div class="row g-4"> {# row com gutter para espaçamento entre cards #}
+        <div class="row g-4"> 
 
             {# Card: Dados Pessoais #}
-            <div class="col-md-6"> {# Ocupa 6 colunas em telas médias+, metade da largura #}
-                <div class="card shadow-sm h-100"> {# h-100 faz o card ocupar 100% da altura do grupo #}
+            <div class="col-md-6">
+                <div class="card shadow-sm h-100"> 
                     <div class="card-header bg-primary text-white">
                         <h4 class="mb-0">Informações Pessoais</h4>
                     </div>
@@ -52,7 +52,7 @@
             </div>
 
             {# Card: Formação e Qualificação #}
-            <div class="col-md-12 mt-4"> {# Ocupa 12 colunas em telas médias+, largura total #}
+            <div class="col-md-12 mt-4">
                 <div class="card shadow-sm">
                     <div class="card-header bg-dark text-white">
                         <h4 class="mb-0">Formação e Qualificação</h4>
