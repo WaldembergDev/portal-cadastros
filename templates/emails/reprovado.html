@@ -1,0 +1,15 @@
+{% extends 'emails/base_email.html' %}
+{% block title %}Atualização do seu Cadastro - Grupo Quality Ambiental{% endblock %}
+{% block email_content %}
+<p>Prezado(a) {{ nome_usuario}},<br>
+
+Agradecemos seu interesse em prestar serviços para o Grupo Quality Ambiental.<br>
+
+Após análise das informações enviadas, informamos que, no momento, seu cadastro não atende aos critérios técnicos e operacionais necessários para as demandas atuais da empresa.<br>
+
+Se desejar, poderá reenviar suas informações futuramente, caso haja atualização em sua formação, atividades ou registro profissional.<br>
+
+Agradecemos pela compreensão e colocamo-nos à disposição para eventuais esclarecimentos.
+<p>Atenciosamente,</p>
+<p>Grupo Quality Ambiental</p>
+{% endblock %}
