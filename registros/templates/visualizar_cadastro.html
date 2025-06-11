@@ -157,6 +157,13 @@
         <div class="text-center mt-5">
             <a href="{% url 'listar_cadastros' %}" class="btn btn-outline-secondary">Voltar para a Lista</a>
         </div>
+         {% if messages %}
+                {% for message in messages %}
+                    <div class="alert {{message.tags}} mt-4" role="alert">
+                        {{message}}
+                    </div>
+                {% endfor %}
+            {% endif %}
 
     </div> {# Fim do container #}
 {% endblock %}

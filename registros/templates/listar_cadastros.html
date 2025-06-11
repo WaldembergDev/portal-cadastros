@@ -63,5 +63,12 @@
       </tbody>
     </table>
   </div>
+  {% if messages %}
+                {% for message in messages %}
+                    <div class="alert {{message.tags}} mt-4" role="alert">
+                        {{message}}
+                    </div>
+                {% endfor %}
+            {% endif %}
 </div>
 {% endblock %}

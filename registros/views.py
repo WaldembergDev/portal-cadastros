@@ -1,4 +1,5 @@
 from email import message
+import email
 from django.shortcuts import redirect, render, get_object_or_404
 from fornecedores.forms import FornecedorForm
 from pessoas.forms import PessoaForm
@@ -77,10 +78,10 @@ def listar_cadastros(request):
 
 # @login_required(login_url='/usuarios/login')
 def visualizacao_kanban(request):
-    pessoas_pendentes = Pessoa.objects.filter(situacao = Pessoa.SituacaoEnum.PENDENTE)
-    pessoas_aprovadas = Pessoa.objects.filter(situacao = Pessoa.SituacaoEnum.APROVADO)
-    pessoas_reprovadas = Pessoa.objects.filter(situacao = Pessoa.SituacaoEnum.REPROVADO)
-    pessoas_concluidas = Pessoa.objects.filter(situacao = Pessoa.SituacaoEnum.APROVADO)
+    pessoas_pendentes = Pessoa.objects.filter(situacao = Pessoa.SituacaoEnum.PENDENTE).filter(email_enviado = False)
+    pessoas_aprovadas = Pessoa.objects.filter(situacao = Pessoa.SituacaoEnum.APROVADO).filter(email_enviado = False)
+    pessoas_reprovadas = Pessoa.objects.filter(situacao = Pessoa.SituacaoEnum.REPROVADO).filter(email_enviado = False)
+    pessoas_concluidas = Pessoa.objects.filter(email_enviado = True)
     context = {
         'pessoas_pendentes': pessoas_pendentes,
         'pessoas_aprovadas': pessoas_aprovadas,
@@ -102,26 +103,42 @@ def visualizar_cadastro(request, id):
 def disparar_emails(request):
     pessoas_pendentes = Pessoa.objects.filter(email_enviado = False)
     # disparando o e-mail para quem está com aprovado
-    pessoas_aprovadas = pessoas_pendentes.filter(situacao = Pessoa.SituacaoEnum.APROVADO.value)
+    pessoas_aprovadas = pessoas_pendentes.filter(situacao = Pessoa.SituacaoEnum.APROVADO)
+    pessoas_reprovadas = pessoas_pendentes.filter(situacao = Pessoa.SituacaoEnum.REPROVADO)
     for pessoa in pessoas_aprovadas:
         # definindo os dados para enviar o e-amil
         email_destinatario = pessoa.email
         tipo_email = TipoEmail.CADASTRO_APROVADO
         nome_destinatario = pessoa.nome_completo
+        # enviando o e-mail
         enviar_email(tipo_email, email_destinatario, nome_destinatario)
+        # atualizando o cadastro para mostrar que foi disparado
+        pessoa.email_enviado = True
+        pessoa.save()
     # disparando o e-mail para quem está reprovado
+    for pessoa in pessoas_reprovadas:
+        print(f'######### {pessoa.nome_completo}')
+        # definindo os dados para enviar o e-amil
+        email_destinatario = pessoa.email
+        tipo_email = TipoEmail.CADASTRO_APROVADO
+        nome_destinatario = pessoa.nome_completo
+        # enviando o e-mail
+        enviar_email(tipo_email, email_destinatario, nome_destinatario)
+        # atualizando o cadastro para mostrar que foi disparado
+        pessoa.email_enviado = True
+        pessoa.save()
     
     # retornando o usuário para a mesma página
-    pessoas_aprovadas = pessoas_pendentes.filter(situacao = Pessoa.SituacaoEnum.REPROVADO.value)
+    pessoas_aprovadas = pessoas_pendentes.filter(situacao = Pessoa.SituacaoEnum.REPROVADO)
     messages.add_message(request, constants.SUCCESS, 'E-mails enviados com sucesso!')
     
-    return redirect('')
-    
+    return redirect('listar_cadastros')
+
+# @login_required(login_url="/usuarios/login")
 def atualizar_cadastro(request, id):
     pessoa = get_object_or_404(Pessoa, id=id)
 
     action = request.POST.get('action')
-    print(f'#### {action}')
 
     if action == 'aprovar':
         pessoa.situacao = Pessoa.SituacaoEnum.APROVADO
