@@ -1,8 +1,6 @@
 import requests
-from dotenv import load_dotenv
+from django.conf import settings
 import os
-
-load_dotenv()
 
 def obter_distancia(cep_origem):
     api_url = "https://maps.googleapis.com/maps/api/distancematrix/json"
@@ -12,7 +10,7 @@ def obter_distancia(cep_origem):
         "destinations": "21031790",
         "mode": "transit",
         "language": "pt-BR",
-        "key": os.getenv('MAPS_API_KEY')
+        "key": settings.MAPS_API_KEY
     }
 
     try:

@@ -6,7 +6,7 @@ from enum import Enum
 # definindo os locais do html
 class TipoEmail(Enum):
     INSCRICAO = ('emails/inscricao.html', 'Confirmação de inscrição!')
-    CADASTRO_APROVADO = ('emails/cadastro_aprovado.html', 'Seu Cadastro Foi Aprovado! Bem-vindo(a) ao Grupo Quality Ambiental')
+    CADASTRO_APROVADO = ('emails/cadastro_aprovado.html', 'Seu Cadastro Foi Aprovado!')
     CADASTRO_REPROVADO = ('emails/cadastro_reprovado.html', 'Atualização do seu Cadastro - Grupo Quality Ambiental')
 
     @property

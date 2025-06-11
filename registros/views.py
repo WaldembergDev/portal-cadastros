@@ -11,6 +11,7 @@ from pessoas.models import Pessoa
 from django.contrib.auth.decorators import login_required
 from utils.enviar_email import enviar_email
 from utils.enviar_email import TipoEmail
+from utils.api_maps import obter_distancia
 
 # Create your views here
 def formulario_cadastro(request):
@@ -25,7 +26,7 @@ def formulario_cadastro(request):
             'endereco_form': endereco_form,
             'formacao_form': formacao_form,
         }
-        return render(request, 'cadastro.html', context=context)
+        return render(request, 'cadastro_fornecedor.html', context=context)
     else:
         pessoa_form = PessoaForm(request.POST)
         endereco_form = EnderecoForm(request.POST)
@@ -61,6 +62,14 @@ def formulario_cadastro(request):
             tipo_email = TipoEmail.INSCRICAO
             nome_destinatario = pessoa.nome_completo
             enviar_email(tipo_email, email_destinatario, nome_destinatario)
+            # definindo os dados de distância
+            dados_distancia = obter_distancia(endereco.cep)
+            distancia_km = dados_distancia.get('dados_distancia') / 1000 if dados_distancia.get('dados_distancia') else None
+            distancia_tempo = dados_distancia.get('dados_tempo')
+            endereco.distancia_km = distancia_km
+            endereco.distancia_tempo = distancia_tempo
+            # salvando os dados
+            endereco.save()
             # redirecionando o usuário para a mesma página
             return redirect('/registros/')
         messages.add_message(request, constants.WARNING, 'Erro ao registrar os dados! Tente novamente.')

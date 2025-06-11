@@ -47,6 +47,12 @@
                         <p class="card-text mb-1"><strong>Bairro:</strong> {{ pessoa.endereco.bairro }}</p>
                         <p class="card-text mb-1"><strong>Cidade:</strong> {{ pessoa.endereco.cidade }}</p>
                         <p class="card-text mb-0"><strong>Estado:</strong> {{ pessoa.endereco.estado }}</p>
+                        {% if pessoa.endereco.distancia_km %}
+                        <p class="card-text mb-0"><strong>Distancia(km):</strong> {{ pessoa.endereco.distancia_km }}</p>
+                        {% endif %}
+                        {% if pessoa.endereco.distancia_tempo %}
+                        <p class="card-text mb-0"><strong>Distância(min):</strong> {{ pessoa.endereco.distancia_tempo }}</p>
+                        {% endif %}
                     </div>
                 </div>
             </div>

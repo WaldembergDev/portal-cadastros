@@ -39,6 +39,8 @@ class Endereco(models.Model):
     bairro = models.CharField(max_length=50)
     cidade = models.CharField(max_length=50)
     estado = models.CharField(max_length=50)
+    distancia_km = models.IntegerField(null=True, blank=True)
+    distancia_tempo = models.CharField(max_length=255, null=True, blank=True)
     pessoa = models.OneToOneField(Pessoa, on_delete=models.CASCADE)
 
 # dados formação

@@ -26,7 +26,7 @@ class EnderecoForm(forms.ModelForm):
     class Meta:
         model = Endereco
         fields = '__all__'
-        exclude = ['pessoa']
+        exclude = ['pessoa', 'distancia_km', 'distancia_tempo']
         labels = {
             'cep': 'CEP',
             'numero': 'Número'
