@@ -5,7 +5,7 @@ from enum import Enum
 
 # definindo os locais do html
 class TipoEmail(Enum):
-    INSCRICAO = ('emails/inscricao.html', 'Confirmação de inscriação!')
+    INSCRICAO = ('emails/inscricao.html', 'Confirmação de inscrição!')
 
     @property
     def template_path(self):

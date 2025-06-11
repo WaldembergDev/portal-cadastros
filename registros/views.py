@@ -7,6 +7,8 @@ from django.contrib import messages
 from django.contrib.messages import constants
 from pessoas.models import Pessoa
 from django.contrib.auth.decorators import login_required
+from utils.enviar_email import enviar_email
+from utils.enviar_email import TipoEmail
 
 # Create your views here
 def formulario_cadastro(request):
@@ -52,6 +54,12 @@ def formulario_cadastro(request):
                 'formacao_form': formacao_form
             }
             messages.add_message(request, constants.SUCCESS, 'Dados registrados com sucesso!')
+            # definindo os dados para enviar o e-amil
+            email_destinatario = pessoa.email
+            tipo_email = TipoEmail.INSCRICAO
+            nome_destinatario = pessoa.nome_completo
+            enviar_email(tipo_email, email_destinatario, nome_destinatario)
+            # redirecionando o usuário para a mesma página
             return redirect('/registros/')
         messages.add_message(request, constants.WARNING, 'Erro ao registrar os dados! Tente novamente.')
         return render(request, 'cadastro.html', context=context)

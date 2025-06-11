@@ -7,7 +7,7 @@ class PessoaForm(forms.ModelForm):
     class Meta:
         model = Pessoa
         fields = '__all__'
-        exclude = ['data_cadastro', 'situacao']
+        exclude = ['data_cadastro', 'situacao', 'email_enviado']
         labels = {
             'cpf': 'CPF',
             'possui_veiculo': 'Possui veículo',
