@@ -14,7 +14,10 @@
         Visualização em Kanban
       </a>
     </div>
-    <a class="btn btn-success" href="#">Iniciar Automação</a>
+    <form method="post" action="{% url 'disparar_emails' %}" style="display:inline;">
+                {% csrf_token %} 
+                <button type="submit" class="btn btn-success">Iniciar Automação</button>
+            </form>
   </div>
 
   <div class="table-responsive mt-3">

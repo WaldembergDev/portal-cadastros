@@ -69,7 +69,7 @@ def formulario_cadastro(request):
 
 # @login_required(login_url='/usuarios/login')
 def listar_cadastros(request):
-    cadastros = Pessoa.objects.all()
+    cadastros = Pessoa.objects.filter(email_enviado = False)
     context = {
         'cadastros': cadastros
     }
@@ -105,6 +105,11 @@ def disparar_emails(request):
     # disparando o e-mail para quem está com aprovado
     pessoas_aprovadas = pessoas_pendentes.filter(situacao = Pessoa.SituacaoEnum.APROVADO)
     pessoas_reprovadas = pessoas_pendentes.filter(situacao = Pessoa.SituacaoEnum.REPROVADO)
+
+    # verificando se não existem pessoas classificadas
+    if  not pessoas_aprovadas and not pessoas_reprovadas:
+        messages.add_message(request, constants.WARNING, 'Não existem pessoas classificadas!')
+        return redirect('listar_cadastros')
     for pessoa in pessoas_aprovadas:
         # definindo os dados para enviar o e-amil
         email_destinatario = pessoa.email
@@ -117,10 +122,9 @@ def disparar_emails(request):
         pessoa.save()
     # disparando o e-mail para quem está reprovado
     for pessoa in pessoas_reprovadas:
-        print(f'######### {pessoa.nome_completo}')
         # definindo os dados para enviar o e-amil
         email_destinatario = pessoa.email
-        tipo_email = TipoEmail.CADASTRO_APROVADO
+        tipo_email = TipoEmail.CADASTRO_REPROVADO
         nome_destinatario = pessoa.nome_completo
         # enviando o e-mail
         enviar_email(tipo_email, email_destinatario, nome_destinatario)
