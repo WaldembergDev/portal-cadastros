@@ -142,6 +142,16 @@
             </div>
 
         </div> {# Fim da row #}
+        
+        {# Formulário único para Aprovar/Reprovar #}
+        <div class="d-flex justify-content-center gap-5 pt-5">
+            <form method="POST" action="{% url 'atualizar_cadastro' pessoa.id %}">
+                {% csrf_token %}
+                <input type="hidden" name="pessoa_id" value="{{ pessoa.id }}"> {# Adiciona o ID da pessoa como um campo oculto #}
+                <button type="submit" name="action" value="aprovar" class="btn btn-primary">Aprovar</button>
+                <button type="submit" name="action" value="reprovar" class="btn btn-warning">Reprovar</button>
+            </form>
+        </div>    
 
         {# Botão de Voltar #}
         <div class="text-center mt-5">

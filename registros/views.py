@@ -1,4 +1,5 @@
-from django.shortcuts import redirect, render
+from email import message
+from django.shortcuts import redirect, render, get_object_or_404
 from fornecedores.forms import FornecedorForm
 from pessoas.forms import PessoaForm
 from pessoas.forms import EnderecoForm
@@ -116,4 +117,20 @@ def disparar_emails(request):
     
     return redirect('')
     
-    
+def atualizar_cadastro(request, id):
+    pessoa = get_object_or_404(Pessoa, id=id)
+
+    action = request.POST.get('action')
+    print(f'#### {action}')
+
+    if action == 'aprovar':
+        pessoa.situacao = Pessoa.SituacaoEnum.APROVADO
+        pessoa.save()
+        messages.add_message(request, constants.SUCCESS, 'Cadastro aprovado com sucesso!')
+    elif action == 'reprovar':
+        pessoa.situacao = Pessoa.SituacaoEnum.REPROVADO
+        pessoa.save()
+        messages.add_message(request, constants.ERROR, 'Cadastro reprovado com sucesso!')
+    else:
+        messages.add_message(request, constants.ERROR, 'Erro ao atualizar cadastro!')
+    return redirect('visualizar_cadastro', id=id)
