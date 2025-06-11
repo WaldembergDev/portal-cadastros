@@ -137,3 +137,15 @@ MESSAGE_TAGS = {
 
 # configurando o usuário padrão do Django
 AUTH_USER_MODEL = 'usuarios.Usuario'
+
+# configurações de envio de e-mail
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+EMAIL_HOST = 'smtp.zoho.com' 
+EMAIL_PORT = 587  
+EMAIL_HOST_USER = 'waldemberg@grupoqualityambiental.com.br'
+EMAIL_HOST_PASSWORD = 'wyta7NPAVFzB'
+EMAIL_USE_TLS = True 
+EMAIL_USE_SSL = False
+DEFAULT_FROM_EMAIL = 'waldemberg@grupoqualityambiental.com.br'
+
