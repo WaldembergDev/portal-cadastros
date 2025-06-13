@@ -64,10 +64,11 @@ def formulario_cadastro(request):
             enviar_email(tipo_email, email_destinatario, nome_destinatario)
             # definindo os dados de distância
             dados_distancia = obter_distancia(endereco.cep)
-            distancia_km = dados_distancia.get('dados_distancia') / 1000 if dados_distancia.get('dados_distancia') else None
-            distancia_tempo = dados_distancia.get('dados_tempo')
-            endereco.distancia_km = distancia_km
-            endereco.distancia_tempo = distancia_tempo
+            if dados_distancia:
+                distancia_km = dados_distancia.get('dados_distancia') / 1000 if dados_distancia.get('dados_distancia') else None
+                distancia_tempo = dados_distancia.get('dados_tempo')
+                endereco.distancia_km = distancia_km
+                endereco.distancia_tempo = distancia_tempo
             # salvando os dados
             endereco.save()
             # redirecionando o usuário para a mesma página
