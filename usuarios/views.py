@@ -20,6 +20,9 @@ def login(request):
         else:
             messages.add_message(request, constants.ERROR, 'Login ou senha inválidos!')
             return redirect('/registros/listar_cadastros/')
-            
+
+def logout(request):
+    auth.logout(request)
+    return redirect('/usuarios/login')
 
         

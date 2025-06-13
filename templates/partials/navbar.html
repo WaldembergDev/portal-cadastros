@@ -13,7 +13,7 @@
       <ul class="navbar-nav gap-2">
         <li class="nav-item">
           <a class="nav-link text-white {% if request.path == '/lista/' %}fw-bold border-bottom border-light{% endif %}" 
-             href="#">Sair da Conta</a>
+             href="{% url 'logout' %}">Sair da Conta</a>
         </li>
       </ul>
     </div>
