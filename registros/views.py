@@ -76,7 +76,7 @@ def formulario_cadastro(request):
         return render(request, 'cadastro.html', context=context)
 
 
-# @login_required(login_url='/usuarios/login')
+@login_required(login_url='/usuarios/login')
 def listar_cadastros(request):
     cadastros = Pessoa.objects.filter(email_enviado = False)
     context = {
@@ -85,7 +85,7 @@ def listar_cadastros(request):
     return render(request, 'listar_cadastros.html', context=context)
 
 
-# @login_required(login_url='/usuarios/login')
+@login_required(login_url='/usuarios/login')
 def visualizacao_kanban(request):
     pessoas_pendentes = Pessoa.objects.filter(situacao = Pessoa.SituacaoEnum.PENDENTE).filter(email_enviado = False)
     pessoas_aprovadas = Pessoa.objects.filter(situacao = Pessoa.SituacaoEnum.APROVADO).filter(email_enviado = False)
@@ -100,7 +100,7 @@ def visualizacao_kanban(request):
     return render(request, 'visualizacao_kanban.html', context=context)
 
 
-# @login_required(login_url="/usuarios/login")
+@login_required(login_url="/usuarios/login")
 def visualizar_cadastro(request, id):
     pessoa = Pessoa.objects.get(id=id)
     context = {
@@ -108,7 +108,7 @@ def visualizar_cadastro(request, id):
     }
     return render(request, 'visualizar_cadastro.html', context=context)
 
-# @login_required(login_url="/usuarios/login")
+@login_required(login_url="/usuarios/login")
 def disparar_emails(request):
     # obtendo apenas as pessoas que estão com e-mail - false
     pessoas_pendentes = Pessoa.objects.filter(email_enviado = False)
@@ -148,7 +148,7 @@ def disparar_emails(request):
     
     return redirect('listar_cadastros')
 
-# @login_required(login_url="/usuarios/login")
+@login_required(login_url="/usuarios/login")
 def atualizar_cadastro(request, id):
     pessoa = get_object_or_404(Pessoa, id=id)
 
