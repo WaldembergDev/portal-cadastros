@@ -1,0 +1,21 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-2" href="#">
+      {% comment %} <img src="{% static 'img/logo.svg' %}" alt="Logo" width="30" height="30" class="d-inline-block align-text-top"> {% endcomment %}
+      Qualy Lab
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+      <ul class="navbar-nav gap-2">
+        <li class="nav-item">
+          <a class="nav-link text-white {% if request.path == '/lista/' %}fw-bold border-bottom border-light{% endif %}" 
+             href="#">Sair da Conta</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
