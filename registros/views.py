@@ -78,7 +78,15 @@ def formulario_cadastro(request):
 
 @login_required(login_url='/usuarios/login')
 def listar_cadastros(request):
-    cadastros = Pessoa.objects.filter(email_enviado = False)
+    avaliado = request.GET.get('enviado')
+    if avaliado:
+        if avaliado == 'true':
+            avaliado = True
+        else:
+            avaliado = False
+    else:
+        avaliado = False
+    cadastros = Pessoa.objects.filter(email_enviado = avaliado)
     context = {
         'cadastros': cadastros
     }

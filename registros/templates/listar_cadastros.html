@@ -7,11 +7,11 @@
 
   <div class="d-flex align-items-center justify-content-between flex-wrap gap-3 mb-5">
     <div class="btn-group" role="group">
-      <a class="btn btn-outline-primary active" href="{% url 'listar_cadastros' %}">
-        Visualização em Lista
+      <a class="btn btn-outline-primary {% if request.GET.enviado == 'true' %}active{% endif %}" href="{% url request.resolver_match.url_name %}?enviado=true">
+        Avaliados
       </a>
-      <a class="btn btn-outline-secondary" href="{% url 'visualizacao_kanban' %}">
-        Visualização em Kanban
+      <a class="btn btn-outline-primary {% if request.GET.enviado == 'false' %}active{% endif %}" href="{% url request.resolver_match.url_name %}?enviado=false">
+        Avaliar
       </a>
     </div>
     <form method="post" action="{% url 'disparar_emails' %}" style="display:inline;">
