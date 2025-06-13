@@ -167,10 +167,12 @@ def atualizar_cadastro(request, id):
         pessoa.situacao = Pessoa.SituacaoEnum.APROVADO
         pessoa.save()
         messages.add_message(request, constants.SUCCESS, 'Cadastro aprovado com sucesso!')
+        return redirect('listar_cadastros')
     elif action == 'reprovar':
         pessoa.situacao = Pessoa.SituacaoEnum.REPROVADO
         pessoa.save()
         messages.add_message(request, constants.ERROR, 'Cadastro reprovado com sucesso!')
+        return redirect('listar_cadastros')
     else:
         messages.add_message(request, constants.ERROR, 'Erro ao atualizar cadastro!')
     return redirect('visualizar_cadastro', id=id)

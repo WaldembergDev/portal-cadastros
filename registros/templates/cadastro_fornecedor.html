@@ -46,7 +46,7 @@
                 </fieldset>
 
                 <div class="text-end">
-                    <button type="submit" class="btn btn-success">Cadastrar</button>
+                    <button type="submit" class="btn btn-success" id="btn-cadastrar">Cadastrar</button>
                 </div>
             </form>
             {% if messages %}
@@ -59,4 +59,21 @@
         </div>
     </div>
 </div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const form = document.querySelector('form'); // Seleciona o formulário
+        const submitButton = document.getElementById('btn-cadastrar');
+
+        if (form && submitButton) {
+            form.addEventListener('submit', function() {
+                // Desabilita o botão para prevenir múltiplos cliques
+                submitButton.disabled = true;
+
+                // Opcional: Altera o texto do botão ou adiciona um spinner
+                submitButton.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Cadastrando...';
+            });
+        }
+    });
+</script>
+
 {% endblock %}
