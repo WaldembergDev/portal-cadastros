@@ -145,6 +145,9 @@ AUTH_USER_MODEL = 'usuarios.Usuario'
 # configurações de envio de e-mail
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
+ZEPTOMAIL_API_KEY = os.getenv('ZEPTOMAIL_API_KEY')
+ZEPTOMAIL_API_ENDPOINT = os.getenv('ZEPTOMAIL_API_ENDPOINT')
+
 EMAIL_HOST = os.getenv('EMAIL_HOST') 
 EMAIL_PORT = os.getenv('EMAIL_PORT')  
 EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
