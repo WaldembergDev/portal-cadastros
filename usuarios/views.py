@@ -7,7 +7,7 @@ from django.contrib.messages import constants
 # Create your views here.
 def login(request):
     if request.user.is_authenticated:
-        redirect('registros/listar_cadastros/')
+        redirect('registros/listar_cadastros/?enviado=false')
     if request.method == 'GET':
         return render(request, 'login.html')
     else:
@@ -16,10 +16,10 @@ def login(request):
         user = auth.authenticate(request, username=login, password=password)
         if user:
             auth.login(request, user)
-            return redirect('/registros/listar_cadastros/')
+            return redirect('/registros/listar_cadastros/?enviado=false')
         else:
             messages.add_message(request, constants.ERROR, 'Login ou senha inválidos!')
-            return redirect('/registros/listar_cadastros/')
+            return redirect('/usuarios/login')
 
 def logout(request):
     auth.logout(request)
