@@ -161,7 +161,7 @@
 
         {# Botão de Voltar #}
         <div class="text-center mt-5">
-            <a href="{% url 'listar_cadastros' %}" class="btn btn-outline-secondary">Voltar para a Lista</a>
+            <a href="{% url 'listar_cadastros' %}?enviado=false" class="btn btn-outline-secondary">Voltar para a Lista</a>
         </div>
          {% if messages %}
                 {% for message in messages %}
@@ -171,5 +171,5 @@
                 {% endfor %}
             {% endif %}
 
-    </div> {# Fim do container #}
+    </div>
 {% endblock %}
