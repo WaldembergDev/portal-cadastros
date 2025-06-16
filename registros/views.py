@@ -85,9 +85,10 @@ def listar_cadastros(request):
             avaliado = True
         else:
             avaliado = False
-    else:
-        avaliado = False
-    cadastros = Pessoa.objects.filter(email_enviado = avaliado)
+    if avaliado is None:
+        cadastros = Pessoa.objects.all()
+    else:    
+        cadastros = Pessoa.objects.filter(email_enviado = avaliado)
     context = {
         'cadastros': cadastros
     }
@@ -167,12 +168,12 @@ def atualizar_cadastro(request, id):
         pessoa.situacao = Pessoa.SituacaoEnum.APROVADO
         pessoa.save()
         messages.add_message(request, constants.SUCCESS, 'Cadastro aprovado com sucesso!')
-        return redirect('listar_cadastros/?enviado=false')
+        return redirect('/registros/listar_cadastros/?enviado=false')
     elif action == 'reprovar':
         pessoa.situacao = Pessoa.SituacaoEnum.REPROVADO
         pessoa.save()
         messages.add_message(request, constants.ERROR, 'Cadastro reprovado com sucesso!')
-        return redirect('listar_cadastros/?enviado=false')
+        return redirect('/registros/listar_cadastros/?enviado=false')
     else:
         messages.add_message(request, constants.ERROR, 'Erro ao atualizar cadastro!')
     return redirect('visualizar_cadastro', id=id)
