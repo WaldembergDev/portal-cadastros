@@ -18,7 +18,7 @@ class FornecedorForm(forms.ModelForm):
             'cnae_secundario': 'CNAE Secundário',
             'prestou_servicos_mei': 'Prestou serviços como MEI',
             'servicos_prestados': 'Serviços Prestados',
-            'area_interesse': 'Área(s) de Interesse',
+            'area_interesse': 'Área(s) de Interesse (pode selecionar mais de uma opção)',
             'possui_disponibilidade_servicos_eventuais': 'Possui disponibilidade para serviços eventuais ou sob demanda',
             'possui_smartphone': 'Possui smartphone com sistema operacional Android para aceite das demandas do trabalho',
             'atuou_em_laboratorio_analise_ambiental': 'Atuou em labotatório de análise ambiental',
