@@ -7,7 +7,7 @@ from django.contrib.messages import constants
 # Create your views here.
 def login(request):
     if request.user.is_authenticated:
-        redirect('registros/listar_cadastros/?enviado=false')
+        return redirect('/registros/listar_cadastros/?enviado=false')
     if request.method == 'GET':
         return render(request, 'login.html')
     else:
