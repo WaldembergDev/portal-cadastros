@@ -129,7 +129,7 @@ def disparar_emails(request):
     # verificando se não existem pessoas classificadas
     if  not pessoas_aprovadas and not pessoas_reprovadas:
         messages.add_message(request, constants.WARNING, 'Não existem pessoas classificadas!')
-        return redirect('listar_cadastros')
+        return redirect('/registros/listar_cadastros/?enviado=false')
     for pessoa in pessoas_aprovadas:
         # definindo os dados para enviar o e-amil
         email_destinatario = pessoa.email
@@ -156,7 +156,7 @@ def disparar_emails(request):
     pessoas_aprovadas = pessoas_pendentes.filter(situacao = Pessoa.SituacaoEnum.REPROVADO)
     messages.add_message(request, constants.SUCCESS, 'E-mails enviados com sucesso!')
     
-    return redirect('listar_cadastros')
+    return redirect('/registros/listar_cadastros/?enviado=false')
 
 @login_required(login_url="/usuarios/login")
 def atualizar_cadastro(request, id):
